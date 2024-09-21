@@ -30,7 +30,7 @@ class PlayerXState implements State {
     console.log(
       `Switching from player ${this.currentPlayer} to ${this.game.oState.currentPlayer}`,
     );
-    this.game.setState(this.game.oState);
+    this.game.transitionTo(this.game.oState);
   }
 }
 
@@ -46,7 +46,7 @@ class PlayerOState implements State {
     console.log(
       `Switching from player ${this.currentPlayer} to ${this.game.xState.currentPlayer}`,
     );
-    this.game.setState(this.game.xState);
+    this.game.transitionTo(this.game.xState);
   }
 }
 
@@ -71,11 +71,7 @@ class TicTacToeGame {
     this.switchPlayer();
   }
 
-  private switchPlayer() {
-    this.currentState.switchPlayer();
-  }
-
-  setState(state: State) {
+  transitionTo(state: State) {
     this.currentState = state;
   }
 
@@ -89,6 +85,10 @@ class TicTacToeGame {
     }
 
     return Player.X;
+  }
+
+  private switchPlayer() {
+    this.currentState.switchPlayer();
   }
 }
 
