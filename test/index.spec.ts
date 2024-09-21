@@ -50,16 +50,31 @@ class PlayerOState implements State {
   }
 }
 
+class Squares {
+  private squares: Player[] = [];
+  static instance() {
+    return new Squares();
+  }
+  put(player: Player, square: number) {
+    this.squares[square] = player;
+  }
+
+  findPlayerAt(square: number) {
+    return this.squares[square];
+  }
+}
+
 class TicTacToeGame {
   public currentState: State;
   public oState: State;
   public xState: State;
-  private squares: string[] = [];
+  squares: Squares;
 
-  constructor() {
+  constructor(squares: Squares) {
     this.xState = new PlayerXState(this);
     this.oState = new PlayerOState(this);
     this.currentState = new PlayerXState(this);
+    this.squares = squares;
   }
 
   getCurrentPlayer() {
@@ -67,7 +82,7 @@ class TicTacToeGame {
   }
 
   play(square: number) {
-    this.squares[square] = this.currentState.currentPlayer;
+    this.squares.put(this.currentState.currentPlayer, square);
     this.switchPlayer();
   }
 
@@ -77,9 +92,9 @@ class TicTacToeGame {
 
   getWinner() {
     if (
-      this.squares[Square.One] === Player.O &&
-      this.squares[Square.Two] === Player.O &&
-      this.squares[Square.Three] === Player.O
+      this.squares.findPlayerAt(Square.One) === Player.O &&
+      this.squares.findPlayerAt(Square.Two) === Player.O &&
+      this.squares.findPlayerAt(Square.Three) === Player.O
     ) {
       return Player.O;
     }
@@ -93,21 +108,28 @@ class TicTacToeGame {
 }
 
 describe("Tic Tac Toe Should", () => {
+  let game: TicTacToeGame;
+  let squares: Squares;
+  beforeEach(() => {
+    squares = Squares.instance();
+    game = new TicTacToeGame(squares);
+  });
   test("make 'X' make first move", () => {
-    let game = new TicTacToeGame();
+    const squares = Squares.instance();
+    let game = new TicTacToeGame(squares);
     let currentPlayer = game.getCurrentPlayer();
     expect(currentPlayer).toBe(Player.X);
   });
 
   test("make 'O' place the second mark", () => {
-    let game = new TicTacToeGame();
+    let game = new TicTacToeGame(squares);
     game.play(Square.One);
     let currentPlayer = game.getCurrentPlayer();
     expect(currentPlayer).toBe(Player.O);
   });
 
   test("make 'X' place the third mark", () => {
-    let game = new TicTacToeGame();
+    let game = new TicTacToeGame(squares);
     game.play(Square.One);
     game.play(Square.Two);
     let currentPlayer = game.getCurrentPlayer();
@@ -115,7 +137,7 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 marks in row horizontally", () => {
-    let game = new TicTacToeGame();
+    let game = new TicTacToeGame(squares);
     game.play(Square.One);
     game.play(Square.Four);
     game.play(Square.Two);
@@ -126,7 +148,7 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 marks in row horizontally", () => {
-    let game = new TicTacToeGame();
+    let game = new TicTacToeGame(squares);
     game.play(Square.Four);
     game.play(Square.One);
     game.play(Square.Seven);
