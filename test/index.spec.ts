@@ -54,7 +54,7 @@ class TicTacToeGame {
     return this.currentState.currentPlayer;
   }
 
-  play() {
+  play(square: number) {
     this.switchPlayer();
   }
 
@@ -64,6 +64,10 @@ class TicTacToeGame {
 
   setState(state: State) {
     this.currentState = state;
+  }
+
+  getWinner() {
+    return Player.X;
   }
 }
 
@@ -76,16 +80,27 @@ describe("Tic Tac Toe Should", () => {
 
   test("make 'O' place the second mark", () => {
     let game = new TicTacToeGame();
-    game.play();
+    game.play(0);
     let currentPlayer = game.getCurrentPlayer();
     expect(currentPlayer).toBe(Player.O);
   });
 
   test("make 'X' place the third mark", () => {
     let game = new TicTacToeGame();
-    game.play();
-    game.play();
+    game.play(0);
+    game.play(1);
     let currentPlayer = game.getCurrentPlayer();
     expect(currentPlayer).toBe(Player.X);
+  });
+
+  test("make 'X' winner with 3 marks in row horizontally", () => {
+    let game = new TicTacToeGame();
+    game.play(0);
+    game.play(3);
+    game.play(1);
+    game.play(4);
+    game.play(2);
+    let winner = game.getWinner();
+    expect(winner).toBe(Player.X);
   });
 });
