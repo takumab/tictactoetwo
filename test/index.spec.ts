@@ -43,6 +43,7 @@ class TicTacToeGame {
   public currentState: State;
   public oState: State;
   public xState: State;
+  private squares: string[] = [];
 
   constructor() {
     this.xState = new PlayerXState(this);
@@ -55,6 +56,7 @@ class TicTacToeGame {
   }
 
   play(square: number) {
+    this.squares[square] = this.currentState.currentPlayer;
     this.switchPlayer();
   }
 
@@ -67,6 +69,14 @@ class TicTacToeGame {
   }
 
   getWinner() {
+    if (
+      this.squares[0] === Player.O &&
+      this.squares[1] === Player.O &&
+      this.squares[2] === Player.O
+    ) {
+      return Player.O;
+    }
+
     return Player.X;
   }
 }
@@ -102,5 +112,17 @@ describe("Tic Tac Toe Should", () => {
     game.play(2);
     let winner = game.getWinner();
     expect(winner).toBe(Player.X);
+  });
+
+  test("make 'O' winner with 3 marks in row horizontally", () => {
+    let game = new TicTacToeGame();
+    game.play(3);
+    game.play(0);
+    game.play(6);
+    game.play(1);
+    game.play(4);
+    game.play(2);
+    let winner = game.getWinner();
+    expect(winner).toBe(Player.O);
   });
 });
