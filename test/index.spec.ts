@@ -2,6 +2,17 @@ enum Player {
   X = "X",
   O = "O",
 }
+enum Square {
+  One = 0,
+  Two = 1,
+  Three = 2,
+  Four = 3,
+  Five = 4,
+  Six = 5,
+  Seven = 6,
+  Eight = 7,
+  Nine = 8,
+}
 
 interface State {
   currentPlayer: Player;
@@ -70,9 +81,9 @@ class TicTacToeGame {
 
   getWinner() {
     if (
-      this.squares[0] === Player.O &&
-      this.squares[1] === Player.O &&
-      this.squares[2] === Player.O
+      this.squares[Square.One] === Player.O &&
+      this.squares[Square.Two] === Player.O &&
+      this.squares[Square.Three] === Player.O
     ) {
       return Player.O;
     }
@@ -90,38 +101,38 @@ describe("Tic Tac Toe Should", () => {
 
   test("make 'O' place the second mark", () => {
     let game = new TicTacToeGame();
-    game.play(0);
+    game.play(Square.One);
     let currentPlayer = game.getCurrentPlayer();
     expect(currentPlayer).toBe(Player.O);
   });
 
   test("make 'X' place the third mark", () => {
     let game = new TicTacToeGame();
-    game.play(0);
-    game.play(1);
+    game.play(Square.One);
+    game.play(Square.Two);
     let currentPlayer = game.getCurrentPlayer();
     expect(currentPlayer).toBe(Player.X);
   });
 
   test("make 'X' winner with 3 marks in row horizontally", () => {
     let game = new TicTacToeGame();
-    game.play(0);
-    game.play(3);
-    game.play(1);
-    game.play(4);
-    game.play(2);
+    game.play(Square.One);
+    game.play(Square.Four);
+    game.play(Square.Two);
+    game.play(Square.Five);
+    game.play(Square.Three);
     let winner = game.getWinner();
     expect(winner).toBe(Player.X);
   });
 
   test("make 'O' winner with 3 marks in row horizontally", () => {
     let game = new TicTacToeGame();
-    game.play(3);
-    game.play(0);
-    game.play(6);
-    game.play(1);
-    game.play(4);
-    game.play(2);
+    game.play(Square.Four);
+    game.play(Square.One);
+    game.play(Square.Seven);
+    game.play(Square.Two);
+    game.play(Square.Five);
+    game.play(Square.Three);
     let winner = game.getWinner();
     expect(winner).toBe(Player.O);
   });
