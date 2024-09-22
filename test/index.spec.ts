@@ -98,8 +98,13 @@ class TicTacToeGame {
     ) {
       return Player.O;
     }
-
-    return Player.X;
+    if (
+      this.squares.findPlayerAt(Square.One) === Player.X &&
+      this.squares.findPlayerAt(Square.Two) === Player.X &&
+      this.squares.findPlayerAt(Square.Three) === Player.X
+    ) {
+      return Player.X;
+    }
   }
 
   private switchPlayer() {
