@@ -105,6 +105,13 @@ class TicTacToeGame {
     ) {
       return Player.X;
     }
+    if (
+      this.squares.findPlayerAt(Square.Four) === Player.X &&
+      this.squares.findPlayerAt(Square.Five) === Player.X &&
+      this.squares.findPlayerAt(Square.Six) === Player.X
+    ) {
+      return Player.X;
+    }
   }
 
   private switchPlayer() {
@@ -120,47 +127,61 @@ describe("Tic Tac Toe Should", () => {
     game = new TicTacToeGame(squares);
   });
   test("make 'X' make first move", () => {
-    const squares = Squares.instance();
-    let game = new TicTacToeGame(squares);
     let currentPlayer = game.getCurrentPlayer();
     expect(currentPlayer).toBe(Player.X);
   });
 
   test("make 'O' place the second mark", () => {
-    let game = new TicTacToeGame(squares);
     game.play(Square.One);
+
     let currentPlayer = game.getCurrentPlayer();
+
     expect(currentPlayer).toBe(Player.O);
   });
 
   test("make 'X' place the third mark", () => {
-    let game = new TicTacToeGame(squares);
     game.play(Square.One);
     game.play(Square.Two);
+
     let currentPlayer = game.getCurrentPlayer();
+
     expect(currentPlayer).toBe(Player.X);
   });
 
   test("make 'X' winner with 3 marks in row horizontally", () => {
-    let game = new TicTacToeGame(squares);
     game.play(Square.One);
     game.play(Square.Four);
     game.play(Square.Two);
     game.play(Square.Five);
     game.play(Square.Three);
+
     let winner = game.getWinner();
+
     expect(winner).toBe(Player.X);
   });
 
   test("make 'O' winner with 3 marks in row horizontally", () => {
-    let game = new TicTacToeGame(squares);
     game.play(Square.Four);
     game.play(Square.One);
     game.play(Square.Seven);
     game.play(Square.Two);
     game.play(Square.Five);
     game.play(Square.Three);
+
     let winner = game.getWinner();
+
     expect(winner).toBe(Player.O);
+  });
+
+  test("make 'X' winner with 3 marks in second horizontal row", () => {
+    game.play(Square.Four);
+    game.play(Square.One);
+    game.play(Square.Five);
+    game.play(Square.Seven);
+    game.play(Square.Six);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe(Player.X);
   });
 });
