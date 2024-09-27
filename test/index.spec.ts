@@ -62,6 +62,10 @@ class Squares {
   findPlayerAt(square: Square) {
     return this.squares[square];
   }
+
+  length() {
+    return this.squares.length;
+  }
 }
 
 class TicTacToeGame {
@@ -91,26 +95,28 @@ class TicTacToeGame {
   }
 
   getWinner() {
-    if (
-      this.squares.findPlayerAt(Square.One) === Player.O &&
-      this.squares.findPlayerAt(Square.Two) === Player.O &&
-      this.squares.findPlayerAt(Square.Three) === Player.O
-    ) {
-      return Player.O;
-    }
-    if (
-      this.squares.findPlayerAt(Square.One) === Player.X &&
-      this.squares.findPlayerAt(Square.Two) === Player.X &&
-      this.squares.findPlayerAt(Square.Three) === Player.X
-    ) {
-      return Player.X;
-    }
-    if (
-      this.squares.findPlayerAt(Square.Four) === Player.X &&
-      this.squares.findPlayerAt(Square.Five) === Player.X &&
-      this.squares.findPlayerAt(Square.Six) === Player.X
-    ) {
-      return Player.X;
+    for (let i = 0; i < this.squares.length(); i++) {
+      if (
+        this.squares.findPlayerAt(Square.One) === Player.O &&
+        this.squares.findPlayerAt(Square.Two) === Player.O &&
+        this.squares.findPlayerAt(Square.Three) === Player.O
+      ) {
+        return Player.O;
+      }
+      if (
+        this.squares.findPlayerAt(Square.One) === Player.X &&
+        this.squares.findPlayerAt(Square.Two) === Player.X &&
+        this.squares.findPlayerAt(Square.Three) === Player.X
+      ) {
+        return Player.X;
+      }
+      if (
+        this.squares.findPlayerAt(Square.Four) === Player.X &&
+        this.squares.findPlayerAt(Square.Five) === Player.X &&
+        this.squares.findPlayerAt(Square.Six) === Player.X
+      ) {
+        return Player.X;
+      }
     }
   }
 
