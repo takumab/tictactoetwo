@@ -207,4 +207,17 @@ describe("Tic Tac Toe Should", () => {
 
     expect(winner).toBe(Player.X);
   });
+
+  test("make 'O' winner with 3 marks in third horizontal row", () => {
+    game.play(Square.Four);
+    game.play(Square.Six);
+    game.play(Square.Two);
+    game.play(Square.Seven);
+    game.play(Square.Three);
+    game.play(Square.Eight);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe(Player.O);
+  });
 });
