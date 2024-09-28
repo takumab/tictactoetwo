@@ -86,7 +86,7 @@ class TicTacToeGame {
   }
 
   play(square: Square) {
-    this.squares.put(this.currentState.currentPlayer, square);
+    this.squares.put(this.getCurrentPlayer(), square);
     this.switchPlayer();
   }
 
