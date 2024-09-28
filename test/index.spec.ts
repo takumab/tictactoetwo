@@ -100,27 +100,14 @@ class TicTacToeGame {
       [Square.Four, Square.Five, Square.Six],
     ];
 
-    for (let i = 0; i < arrayOfWinningLines.length; i++) {
+    for (const winningLine of arrayOfWinningLines) {
       if (
-        this.squares.findPlayerAt(arrayOfWinningLines[0][0]) === Player.O &&
-        this.squares.findPlayerAt(arrayOfWinningLines[0][1]) === Player.O &&
-        this.squares.findPlayerAt(arrayOfWinningLines[0][2]) === Player.O
+        this.squares.findPlayerAt(winningLine[0]) ===
+          this.squares.findPlayerAt(winningLine[1]) &&
+        this.squares.findPlayerAt(winningLine[1]) ===
+          this.squares.findPlayerAt(winningLine[2])
       ) {
-        return Player.O;
-      }
-      if (
-        this.squares.findPlayerAt(arrayOfWinningLines[0][0]) === Player.X &&
-        this.squares.findPlayerAt(arrayOfWinningLines[0][1]) === Player.X &&
-        this.squares.findPlayerAt(arrayOfWinningLines[0][2]) === Player.X
-      ) {
-        return Player.X;
-      }
-      if (
-        this.squares.findPlayerAt(arrayOfWinningLines[1][0]) === Player.X &&
-        this.squares.findPlayerAt(arrayOfWinningLines[1][1]) === Player.X &&
-        this.squares.findPlayerAt(arrayOfWinningLines[1][2]) === Player.X
-      ) {
-        return Player.X;
+        return this.squares.findPlayerAt(winningLine[0]);
       }
     }
   }
