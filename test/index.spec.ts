@@ -3,15 +3,15 @@ enum Player {
   O = "O",
 }
 enum Square {
-  One = 0,
-  Two = 1,
-  Three = 2,
-  Four = 3,
-  Five = 4,
-  Six = 5,
-  Seven = 6,
-  Eight = 7,
-  Nine = 8,
+  Zero = 0,
+  One = 1,
+  Two = 2,
+  Three = 3,
+  Four = 4,
+  Five = 5,
+  Six = 6,
+  Seven = 7,
+  Eight = 8,
 }
 
 interface State {
@@ -62,10 +62,6 @@ class Squares {
   findPlayerAt(square: Square) {
     return this.squares[square];
   }
-
-  length() {
-    return this.squares.length;
-  }
 }
 
 class TicTacToeGame {
@@ -96,8 +92,9 @@ class TicTacToeGame {
 
   getWinner() {
     const arrayOfWinningLines: Square[][] = [
-      [Square.One, Square.Two, Square.Three],
-      [Square.Four, Square.Five, Square.Six],
+      [Square.Zero, Square.One, Square.Two],
+      [Square.Three, Square.Four, Square.Five],
+      [Square.Six, Square.Seven, Square.Eight],
     ];
 
     for (const winningLine of arrayOfWinningLines) {
@@ -133,7 +130,7 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' place the second mark", () => {
-    game.play(Square.One);
+    game.play(Square.Zero);
 
     let currentPlayer = game.getCurrentPlayer();
 
@@ -141,8 +138,8 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' place the third mark", () => {
+    game.play(Square.Zero);
     game.play(Square.One);
-    game.play(Square.Two);
 
     let currentPlayer = game.getCurrentPlayer();
 
@@ -150,11 +147,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 marks in row horizontally", () => {
+    game.play(Square.Zero);
+    game.play(Square.Three);
     game.play(Square.One);
     game.play(Square.Four);
     game.play(Square.Two);
-    game.play(Square.Five);
-    game.play(Square.Three);
 
     let winner = game.getWinner();
 
@@ -162,12 +159,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 marks in row horizontally", () => {
-    game.play(Square.Four);
-    game.play(Square.One);
-    game.play(Square.Seven);
-    game.play(Square.Two);
-    game.play(Square.Five);
     game.play(Square.Three);
+    game.play(Square.Zero);
+    game.play(Square.Six);
+    game.play(Square.One);
+    game.play(Square.Four);
+    game.play(Square.Two);
 
     let winner = game.getWinner();
 
@@ -175,11 +172,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 marks in second horizontal row", () => {
+    game.play(Square.Three);
+    game.play(Square.Zero);
     game.play(Square.Four);
-    game.play(Square.One);
-    game.play(Square.Five);
-    game.play(Square.Seven);
     game.play(Square.Six);
+    game.play(Square.Five);
 
     let winner = game.getWinner();
 
@@ -187,15 +184,27 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 marks in second horizontal row", () => {
-    game.play(Square.One);
-    game.play(Square.Four);
-    game.play(Square.Seven);
-    game.play(Square.Five);
-    game.play(Square.Two);
+    game.play(Square.Zero);
+    game.play(Square.Three);
     game.play(Square.Six);
+    game.play(Square.Four);
+    game.play(Square.One);
+    game.play(Square.Five);
 
     let winner = game.getWinner();
 
     expect(winner).toBe(Player.O);
+  });
+
+  test("make 'X' winner with 3 marks in third horizontal row", () => {
+    game.play(Square.Six);
+    game.play(Square.Three);
+    game.play(Square.Seven);
+    game.play(Square.Two);
+    game.play(Square.Eight);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe(Player.X);
   });
 });
