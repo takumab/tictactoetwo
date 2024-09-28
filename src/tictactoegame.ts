@@ -110,16 +110,16 @@ export class TicTacToeGame {
   getWinner() {
     for (const winningLine of this.winningLines.getAllWinningLines()) {
       if (this.playerHasA(winningLine))
-        return this.squares.findPlayerAt(winningLine[0]);
+        return this.squares.findPlayerAt(winningLine[Square.One]);
     }
   }
 
   private playerHasA(winningLine: Square[]) {
     return (
-      this.squares.findPlayerAt(winningLine[0]) ===
-        this.squares.findPlayerAt(winningLine[1]) &&
-      this.squares.findPlayerAt(winningLine[1]) ===
-        this.squares.findPlayerAt(winningLine[2])
+      this.squares.findPlayerAt(winningLine[Square.Zero]) ===
+        this.squares.findPlayerAt(winningLine[Square.One]) &&
+      this.squares.findPlayerAt(winningLine[Square.One]) ===
+        this.squares.findPlayerAt(winningLine[Square.Two])
     );
   }
 
