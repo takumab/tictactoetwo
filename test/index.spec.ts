@@ -1,10 +1,6 @@
-import {
-  Player,
-  Square,
-  Squares,
-  TicTacToeGame,
-  WinningLines,
-} from "../src/tictactoegame";
+import { Player, Square, TicTacToeGame } from "../src/tictactoegame";
+import { Squares } from "../src/squares";
+import { WinningLines } from "../src/winningLines";
 
 describe("Tic Tac Toe Should", () => {
   let game: TicTacToeGame;
