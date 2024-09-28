@@ -101,15 +101,19 @@ class TicTacToeGame {
     ];
 
     for (const winningLine of arrayOfWinningLines) {
-      if (
-        this.squares.findPlayerAt(winningLine[0]) ===
-          this.squares.findPlayerAt(winningLine[1]) &&
-        this.squares.findPlayerAt(winningLine[1]) ===
-          this.squares.findPlayerAt(winningLine[2])
-      ) {
+      if (this.playerHas(winningLine)) {
         return this.squares.findPlayerAt(winningLine[0]);
       }
     }
+  }
+
+  private playerHas(winningLine: Square[]) {
+    return (
+      this.squares.findPlayerAt(winningLine[0]) ===
+        this.squares.findPlayerAt(winningLine[1]) &&
+      this.squares.findPlayerAt(winningLine[1]) ===
+        this.squares.findPlayerAt(winningLine[2])
+    );
   }
 
   private switchPlayer() {
