@@ -64,17 +64,32 @@ class Squares {
   }
 }
 
+class WinningLines {
+  static instance() {
+    return new WinningLines();
+  }
+  getAllWinningLines(): Square[][] {
+    return [
+      [Square.Zero, Square.One, Square.Two],
+      [Square.Three, Square.Four, Square.Five],
+      [Square.Six, Square.Seven, Square.Eight],
+    ];
+  }
+}
+
 class TicTacToeGame {
   public currentState: State;
   public oState: State;
   public xState: State;
   squares: Squares;
+  winningLines: WinningLines;
 
-  constructor(squares: Squares) {
+  constructor(squares: Squares, winningLines: WinningLines) {
     this.xState = new PlayerXState(this);
     this.oState = new PlayerOState(this);
     this.currentState = new PlayerXState(this);
     this.squares = squares;
+    this.winningLines = winningLines;
   }
 
   getCurrentPlayer() {
@@ -91,13 +106,7 @@ class TicTacToeGame {
   }
 
   getWinner() {
-    const arrayOfWinningLines: Square[][] = [
-      [Square.Zero, Square.One, Square.Two],
-      [Square.Three, Square.Four, Square.Five],
-      [Square.Six, Square.Seven, Square.Eight],
-    ];
-
-    for (const winningLine of arrayOfWinningLines) {
+    for (const winningLine of this.winningLines.getAllWinningLines()) {
       if (this.playerHasA(winningLine))
         return this.squares.findPlayerAt(winningLine[0]);
     }
@@ -120,9 +129,11 @@ class TicTacToeGame {
 describe("Tic Tac Toe Should", () => {
   let game: TicTacToeGame;
   let squares: Squares;
+  let winningLines: WinningLines;
   beforeEach(() => {
     squares = Squares.instance();
-    game = new TicTacToeGame(squares);
+    winningLines = WinningLines.instance();
+    game = new TicTacToeGame(squares, winningLines);
   });
   test("make 'X' make first move", () => {
     let currentPlayer = game.getCurrentPlayer();
