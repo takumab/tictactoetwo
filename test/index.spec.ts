@@ -73,6 +73,7 @@ class WinningLines {
       [Square.Zero, Square.One, Square.Two],
       [Square.Three, Square.Four, Square.Five],
       [Square.Six, Square.Seven, Square.Eight],
+      [Square.Zero, Square.Three, Square.Six],
     ];
   }
 }
@@ -230,5 +231,17 @@ describe("Tic Tac Toe Should", () => {
     let winner = game.getWinner();
 
     expect(winner).toBe(Player.O);
+  });
+
+  test("make 'X' winner with 3 marks in first column", () => {
+    game.play(Square.Zero);
+    game.play(Square.Seven);
+    game.play(Square.Three);
+    game.play(Square.Two);
+    game.play(Square.Six);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe(Player.X);
   });
 });
