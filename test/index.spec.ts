@@ -68,6 +68,7 @@ class WinningLines {
   static instance() {
     return new WinningLines();
   }
+
   getAllWinningLines(): Square[][] {
     return [
       [Square.Zero, Square.One, Square.Two],
@@ -243,5 +244,18 @@ describe("Tic Tac Toe Should", () => {
     let winner = game.getWinner();
 
     expect(winner).toBe(Player.X);
+  });
+
+  test("make 'O' winner with 3 marks in first column", () => {
+    game.play(Square.Seven);
+    game.play(Square.Zero);
+    game.play(Square.Two);
+    game.play(Square.Three);
+    game.play(Square.Five);
+    game.play(Square.Six);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe(Player.O);
   });
 });
