@@ -95,25 +95,30 @@ class TicTacToeGame {
   }
 
   getWinner() {
-    for (let i = 0; i < this.squares.length(); i++) {
+    const arrayOfWinningLines: Square[][] = [
+      [Square.One, Square.Two, Square.Three],
+      [Square.Four, Square.Five, Square.Six],
+    ];
+
+    for (let i = 0; i < arrayOfWinningLines.length; i++) {
       if (
-        this.squares.findPlayerAt(Square.One) === Player.O &&
-        this.squares.findPlayerAt(Square.Two) === Player.O &&
-        this.squares.findPlayerAt(Square.Three) === Player.O
+        this.squares.findPlayerAt(arrayOfWinningLines[0][0]) === Player.O &&
+        this.squares.findPlayerAt(arrayOfWinningLines[0][1]) === Player.O &&
+        this.squares.findPlayerAt(arrayOfWinningLines[0][2]) === Player.O
       ) {
         return Player.O;
       }
       if (
-        this.squares.findPlayerAt(Square.One) === Player.X &&
-        this.squares.findPlayerAt(Square.Two) === Player.X &&
-        this.squares.findPlayerAt(Square.Three) === Player.X
+        this.squares.findPlayerAt(arrayOfWinningLines[0][0]) === Player.X &&
+        this.squares.findPlayerAt(arrayOfWinningLines[0][1]) === Player.X &&
+        this.squares.findPlayerAt(arrayOfWinningLines[0][2]) === Player.X
       ) {
         return Player.X;
       }
       if (
-        this.squares.findPlayerAt(Square.Four) === Player.X &&
-        this.squares.findPlayerAt(Square.Five) === Player.X &&
-        this.squares.findPlayerAt(Square.Six) === Player.X
+        this.squares.findPlayerAt(arrayOfWinningLines[1][0]) === Player.X &&
+        this.squares.findPlayerAt(arrayOfWinningLines[1][1]) === Player.X &&
+        this.squares.findPlayerAt(arrayOfWinningLines[1][2]) === Player.X
       ) {
         return Player.X;
       }
