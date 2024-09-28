@@ -55,7 +55,7 @@ class Squares {
   static instance() {
     return new Squares();
   }
-  put(player: Player, square: Square) {
+  add(player: Player, square: Square) {
     this.squares[square] = player;
   }
 
@@ -86,7 +86,7 @@ class TicTacToeGame {
   }
 
   play(square: Square) {
-    this.squares.put(this.getCurrentPlayer(), square);
+    this.squares.add(this.getCurrentPlayer(), square);
     this.switchPlayer();
   }
 
