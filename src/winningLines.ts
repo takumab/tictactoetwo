@@ -14,6 +14,7 @@ export class WinningLines {
       [Square.One, Square.Four, Square.Seven],
       [Square.Two, Square.Five, Square.Eight],
       [Square.Zero, Square.Four, Square.Eight],
+      [Square.Two, Square.Four, Square.Six],
     ];
   }
 }

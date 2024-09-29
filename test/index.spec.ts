@@ -207,4 +207,16 @@ describe("Tic Tac Toe Should", () => {
 
     expect(winner).toBe(Player.O);
   });
+
+  test("make 'X' winner with 3 consecutive marks diagonally from top right to bottom left", () => {
+    game.play(Square.Two);
+    game.play(Square.One);
+    game.play(Square.Four);
+    game.play(Square.Eight);
+    game.play(Square.Six);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe(Player.X);
+  });
 });
