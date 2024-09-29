@@ -183,7 +183,7 @@ describe("Tic Tac Toe Should", () => {
     expect(winner).toBe(Player.O);
   });
 
-  test("make 'X' winner with 3 consecutive marks in diagonally from top left to bottom right", () => {
+  test("make 'X' winner with 3 consecutive marks diagonally from top left to bottom right", () => {
     game.play(Square.Zero);
     game.play(Square.Six);
     game.play(Square.Four);
@@ -193,5 +193,18 @@ describe("Tic Tac Toe Should", () => {
     let winner = game.getWinner();
 
     expect(winner).toBe(Player.X);
+  });
+
+  test("make 'O' winner with 3 consecutive diagonally from top left to bottom right", () => {
+    game.play(Square.Three);
+    game.play(Square.Zero);
+    game.play(Square.One);
+    game.play(Square.Four);
+    game.play(Square.Five);
+    game.play(Square.Eight);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe(Player.O);
   });
 });
