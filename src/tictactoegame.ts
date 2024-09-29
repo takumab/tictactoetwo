@@ -83,17 +83,7 @@ export class TicTacToeGame {
   }
 
   getWinner() {
-    if (
-      this.squares.findPlayerAt(Square.Zero) === Player.X &&
-      this.squares.findPlayerAt(Square.One) === Player.O &&
-      this.squares.findPlayerAt(Square.Two) === Player.X &&
-      this.squares.findPlayerAt(Square.Three) === Player.O &&
-      this.squares.findPlayerAt(Square.Four) === Player.X &&
-      this.squares.findPlayerAt(Square.Five) === Player.O &&
-      this.squares.findPlayerAt(Square.Six) === Player.X &&
-      this.squares.findPlayerAt(Square.Seven) === Player.O &&
-      this.squares.findPlayerAt(Square.Eight) === Player.X
-    ) {
+    if (this.squares.isGameTied()) {
       return "Tie game!";
     }
 
