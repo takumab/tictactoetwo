@@ -232,4 +232,20 @@ describe("Tic Tac Toe Should", () => {
 
     expect(winner).toBe(Player.O);
   });
+
+  test("have game end in a tie", () => {
+    game.play(Square.Zero);
+    game.play(Square.One);
+    game.play(Square.Two);
+    game.play(Square.Three);
+    game.play(Square.Four);
+    game.play(Square.Five);
+    game.play(Square.Six);
+    game.play(Square.Seven);
+    game.play(Square.Eight);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe("Tie game!");
+  });
 });
