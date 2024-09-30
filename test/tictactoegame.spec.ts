@@ -1,14 +1,14 @@
 import { Player, Square, TicTacToeGame } from "../src/tictactoegame";
-import { Squares } from "../src/squares";
+import { Board } from "../src/board";
 import { WinningLines } from "../src/winningLines";
 
 describe("Tic Tac Toe Should", () => {
   let game: TicTacToeGame;
-  let squares: Squares;
+  let squares: Board;
   let winningLines: WinningLines;
   beforeEach(() => {
-    squares = Squares.instance();
-    winningLines = WinningLines.instance();
+    squares = new Board();
+    winningLines = new WinningLines();
     game = new TicTacToeGame(squares, winningLines);
   });
   test("make 'X' make first move", () => {
@@ -17,7 +17,7 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' place the second mark", () => {
-    game.play(Square.Zero);
+    game.play(Square.TopLeft);
 
     let currentPlayer = game.getCurrentPlayer();
 
@@ -25,8 +25,8 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' place the third mark", () => {
-    game.play(Square.Zero);
-    game.play(Square.One);
+    game.play(Square.TopLeft);
+    game.play(Square.TopMiddle);
 
     let currentPlayer = game.getCurrentPlayer();
 
@@ -34,11 +34,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 marks in row horizontally", () => {
-    game.play(Square.Zero);
-    game.play(Square.Three);
-    game.play(Square.One);
-    game.play(Square.Four);
-    game.play(Square.Two);
+    game.play(Square.TopLeft);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterMiddle);
+    game.play(Square.TopRight);
 
     let winner = game.getWinner();
 
@@ -46,12 +46,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 marks in row horizontally", () => {
-    game.play(Square.Three);
-    game.play(Square.Zero);
-    game.play(Square.Six);
-    game.play(Square.One);
-    game.play(Square.Four);
-    game.play(Square.Two);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopLeft);
+    game.play(Square.BottomLeft);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterMiddle);
+    game.play(Square.TopRight);
 
     let winner = game.getWinner();
 
@@ -59,11 +59,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 marks in second horizontal row", () => {
-    game.play(Square.Three);
-    game.play(Square.Zero);
-    game.play(Square.Four);
-    game.play(Square.Six);
-    game.play(Square.Five);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopLeft);
+    game.play(Square.CenterMiddle);
+    game.play(Square.BottomLeft);
+    game.play(Square.CenterRight);
 
     let winner = game.getWinner();
 
@@ -71,12 +71,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 marks in second horizontal row", () => {
-    game.play(Square.Zero);
-    game.play(Square.Three);
-    game.play(Square.Six);
-    game.play(Square.Four);
-    game.play(Square.One);
-    game.play(Square.Five);
+    game.play(Square.TopLeft);
+    game.play(Square.CenterLeft);
+    game.play(Square.BottomLeft);
+    game.play(Square.CenterMiddle);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterRight);
 
     let winner = game.getWinner();
 
@@ -84,11 +84,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 marks in third horizontal row", () => {
-    game.play(Square.Six);
-    game.play(Square.Three);
-    game.play(Square.Seven);
-    game.play(Square.Two);
-    game.play(Square.Eight);
+    game.play(Square.BottomLeft);
+    game.play(Square.CenterLeft);
+    game.play(Square.BottomMiddle);
+    game.play(Square.TopRight);
+    game.play(Square.BottomRight);
 
     let winner = game.getWinner();
 
@@ -96,12 +96,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 marks in third horizontal row", () => {
-    game.play(Square.Four);
-    game.play(Square.Six);
-    game.play(Square.Two);
-    game.play(Square.Seven);
-    game.play(Square.Three);
-    game.play(Square.Eight);
+    game.play(Square.CenterMiddle);
+    game.play(Square.BottomLeft);
+    game.play(Square.TopRight);
+    game.play(Square.BottomMiddle);
+    game.play(Square.CenterLeft);
+    game.play(Square.BottomRight);
 
     let winner = game.getWinner();
 
@@ -109,11 +109,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 marks in first column", () => {
-    game.play(Square.Zero);
-    game.play(Square.Seven);
-    game.play(Square.Three);
-    game.play(Square.Two);
-    game.play(Square.Six);
+    game.play(Square.TopLeft);
+    game.play(Square.BottomMiddle);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopRight);
+    game.play(Square.BottomLeft);
 
     let winner = game.getWinner();
 
@@ -121,12 +121,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 marks in first column", () => {
-    game.play(Square.Seven);
-    game.play(Square.Zero);
-    game.play(Square.Two);
-    game.play(Square.Three);
-    game.play(Square.Five);
-    game.play(Square.Six);
+    game.play(Square.BottomMiddle);
+    game.play(Square.TopLeft);
+    game.play(Square.TopRight);
+    game.play(Square.CenterLeft);
+    game.play(Square.CenterRight);
+    game.play(Square.BottomLeft);
 
     let winner = game.getWinner();
 
@@ -134,11 +134,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 consecutive marks in second column", () => {
-    game.play(Square.One);
-    game.play(Square.Three);
-    game.play(Square.Four);
-    game.play(Square.Two);
-    game.play(Square.Seven);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterLeft);
+    game.play(Square.CenterMiddle);
+    game.play(Square.TopRight);
+    game.play(Square.BottomMiddle);
 
     let winner = game.getWinner();
 
@@ -146,12 +146,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 consecutive marks in second column", () => {
-    game.play(Square.Three);
-    game.play(Square.One);
-    game.play(Square.Two);
-    game.play(Square.Four);
-    game.play(Square.Five);
-    game.play(Square.Seven);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopMiddle);
+    game.play(Square.TopRight);
+    game.play(Square.CenterMiddle);
+    game.play(Square.CenterRight);
+    game.play(Square.BottomMiddle);
 
     let winner = game.getWinner();
 
@@ -159,11 +159,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 consecutive marks in third column", () => {
-    game.play(Square.Two);
-    game.play(Square.Six);
-    game.play(Square.Five);
-    game.play(Square.One);
-    game.play(Square.Eight);
+    game.play(Square.TopRight);
+    game.play(Square.BottomLeft);
+    game.play(Square.CenterRight);
+    game.play(Square.TopMiddle);
+    game.play(Square.BottomRight);
 
     let winner = game.getWinner();
 
@@ -171,12 +171,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 consecutive marks in third column", () => {
-    game.play(Square.Three);
-    game.play(Square.Two);
-    game.play(Square.One);
-    game.play(Square.Five);
-    game.play(Square.Four);
-    game.play(Square.Eight);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopRight);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterRight);
+    game.play(Square.CenterMiddle);
+    game.play(Square.BottomRight);
 
     let winner = game.getWinner();
 
@@ -184,11 +184,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 consecutive marks diagonally from top left to bottom right", () => {
-    game.play(Square.Zero);
-    game.play(Square.Six);
-    game.play(Square.Four);
-    game.play(Square.One);
-    game.play(Square.Eight);
+    game.play(Square.TopLeft);
+    game.play(Square.BottomLeft);
+    game.play(Square.CenterMiddle);
+    game.play(Square.TopMiddle);
+    game.play(Square.BottomRight);
 
     let winner = game.getWinner();
 
@@ -196,12 +196,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 consecutive diagonally from top left to bottom right", () => {
-    game.play(Square.Three);
-    game.play(Square.Zero);
-    game.play(Square.One);
-    game.play(Square.Four);
-    game.play(Square.Five);
-    game.play(Square.Eight);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopLeft);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterMiddle);
+    game.play(Square.CenterRight);
+    game.play(Square.BottomRight);
 
     let winner = game.getWinner();
 
@@ -209,11 +209,11 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'X' winner with 3 consecutive marks diagonally from top right to bottom left", () => {
-    game.play(Square.Two);
-    game.play(Square.One);
-    game.play(Square.Four);
-    game.play(Square.Eight);
-    game.play(Square.Six);
+    game.play(Square.TopRight);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterMiddle);
+    game.play(Square.BottomRight);
+    game.play(Square.BottomLeft);
 
     let winner = game.getWinner();
 
@@ -221,12 +221,12 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("make 'O' winner with 3 consecutive diagonally from top right to bottom left", () => {
-    game.play(Square.Three);
-    game.play(Square.Two);
-    game.play(Square.One);
-    game.play(Square.Four);
-    game.play(Square.Five);
-    game.play(Square.Six);
+    game.play(Square.CenterLeft);
+    game.play(Square.TopRight);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterMiddle);
+    game.play(Square.CenterRight);
+    game.play(Square.BottomLeft);
 
     let winner = game.getWinner();
 
@@ -234,15 +234,15 @@ describe("Tic Tac Toe Should", () => {
   });
 
   test("have game end in a tie", () => {
-    game.play(Square.Zero);
-    game.play(Square.One);
-    game.play(Square.Two);
-    game.play(Square.Three);
-    game.play(Square.Four);
-    game.play(Square.Five);
-    game.play(Square.Six);
-    game.play(Square.Seven);
-    game.play(Square.Eight);
+    game.play(Square.TopLeft);
+    game.play(Square.TopMiddle);
+    game.play(Square.TopRight);
+    game.play(Square.CenterLeft);
+    game.play(Square.CenterMiddle);
+    game.play(Square.CenterRight);
+    game.play(Square.BottomLeft);
+    game.play(Square.BottomMiddle);
+    game.play(Square.BottomRight);
 
     let winner = game.getWinner();
 

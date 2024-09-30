@@ -1,4 +1,4 @@
-import { Squares } from "./squares";
+import { Board } from "./board";
 import { WinningLines } from "./winningLines";
 
 export enum Player {
@@ -6,17 +6,31 @@ export enum Player {
   O = "O",
 }
 
+// figure out why renaming breaks test
+// rename to names that have meaning
 export enum Square {
-  Zero = 0,
-  One = 1,
-  Two = 2,
-  Three = 3,
-  Four = 4,
-  Five = 5,
-  Six = 6,
-  Seven = 7,
-  Eight = 8,
+  TopLeft = 0,
+  TopMiddle = 1,
+  TopRight = 2,
+  CenterLeft = 3,
+  CenterMiddle = 4,
+  CenterRight = 5,
+  BottomLeft = 6,
+  BottomMiddle = 7,
+  BottomRight = 8,
 }
+
+// export const Square = {
+//   TopLeft: 0,
+//   TopMiddle: 1,
+//   Two: 2,
+//   Three: 3,
+//   Four: 4,
+//   Five: 5,
+//   Six: 6,
+//   Seven: 7,
+//   Eight: 8,
+// };
 
 interface State {
   currentPlayer: Player;
@@ -58,10 +72,10 @@ export class TicTacToeGame {
   private currentState: State;
   public oState: State;
   public xState: State;
-  squares: Squares;
+  squares: Board;
   winningLines: WinningLines;
 
-  constructor(squares: Squares, winningLines: WinningLines) {
+  constructor(squares: Board, winningLines: WinningLines) {
     this.xState = new PlayerXState(this);
     this.oState = new PlayerOState(this);
     this.currentState = new PlayerXState(this);
@@ -89,16 +103,16 @@ export class TicTacToeGame {
 
     for (const winningLine of this.winningLines.getAllWinningLines()) {
       if (this.playerHasA(winningLine))
-        return this.squares.findPlayerAt(winningLine[Square.One]);
+        return this.squares.findPlayerAt(winningLine[0]);
     }
   }
 
   private playerHasA(winningLine: Square[]) {
     return (
-      this.squares.findPlayerAt(winningLine[Square.Zero]) ===
-        this.squares.findPlayerAt(winningLine[Square.One]) &&
-      this.squares.findPlayerAt(winningLine[Square.One]) ===
-        this.squares.findPlayerAt(winningLine[Square.Two])
+      this.squares.findPlayerAt(winningLine[0]) ===
+        this.squares.findPlayerAt(winningLine[1]) &&
+      this.squares.findPlayerAt(winningLine[1]) ===
+        this.squares.findPlayerAt(winningLine[2])
     );
   }
 
