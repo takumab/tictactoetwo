@@ -248,4 +248,20 @@ describe("Tic Tac Toe Should", () => {
 
     expect(winner).toBe("Tie game!");
   });
+
+  test("have game end in a tie with different placement of marks", () => {
+    game.play(Square.TopLeft);
+    game.play(Square.TopRight);
+    game.play(Square.TopMiddle);
+    game.play(Square.CenterLeft);
+    game.play(Square.CenterRight);
+    game.play(Square.CenterMiddle);
+    game.play(Square.BottomLeft);
+    game.play(Square.BottomMiddle);
+    game.play(Square.BottomRight);
+
+    let winner = game.getWinner();
+
+    expect(winner).toBe("Tie game!");
+  });
 });

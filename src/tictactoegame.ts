@@ -72,14 +72,14 @@ export class TicTacToeGame {
   private currentState: State;
   public oState: State;
   public xState: State;
-  squares: Board;
+  board: Board;
   winningLines: WinningLines;
 
-  constructor(squares: Board, winningLines: WinningLines) {
+  constructor(board: Board, winningLines: WinningLines) {
     this.xState = new PlayerXState(this);
     this.oState = new PlayerOState(this);
     this.currentState = new PlayerXState(this);
-    this.squares = squares;
+    this.board = board;
     this.winningLines = winningLines;
   }
 
@@ -88,7 +88,7 @@ export class TicTacToeGame {
   }
 
   play(square: Square) {
-    this.squares.add(this.getCurrentPlayer(), square);
+    this.board.add(this.getCurrentPlayer(), square);
     this.switchPlayer();
   }
 
@@ -97,23 +97,18 @@ export class TicTacToeGame {
   }
 
   getWinner() {
-    if (this.squares.isGameTied()) {
+    if (this.board.isGameTied()) {
       return "Tie game!";
     }
 
     for (const winningLine of this.winningLines.getAllWinningLines()) {
       if (this.playerHasA(winningLine))
-        return this.squares.findPlayerAt(winningLine[0]);
+        return this.board.findPlayerAt(winningLine[0]);
     }
   }
 
   private playerHasA(winningLine: Square[]) {
-    return (
-      this.squares.findPlayerAt(winningLine[0]) ===
-        this.squares.findPlayerAt(winningLine[1]) &&
-      this.squares.findPlayerAt(winningLine[1]) ===
-        this.squares.findPlayerAt(winningLine[2])
-    );
+    return this.board.playerHasA(winningLine);
   }
 
   private switchPlayer() {
