@@ -1,4 +1,4 @@
-import { Player, Players, Position, TicTacToeGame } from "../src/tictactoegame";
+import { Player, Position, TicTacToeGame } from "../src/tictactoegame";
 import { Board } from "../src/board";
 import { WinningLines } from "../src/winningLines";
 
@@ -6,13 +6,10 @@ describe("Tic Tac Toe Should", () => {
   let game: TicTacToeGame;
   let board: Board;
   let winningLines: WinningLines;
-  let players: Players;
   beforeEach(() => {
     board = new Board();
     winningLines = new WinningLines();
-
-    players = new Players(Player.X, Player.O);
-    game = new TicTacToeGame(board, winningLines, players);
+    game = new TicTacToeGame(board, winningLines);
   });
 
   test("make 'X' make first move", () => {
