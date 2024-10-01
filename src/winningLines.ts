@@ -1,16 +1,59 @@
-import { Square } from "./tictactoegame";
+import { Position } from "./tictactoegame";
+
+export class WinningLine {
+  public first: Position;
+  public second: Position;
+  public third: Position;
+  constructor(first: Position, second: Position, third: Position) {
+    this.first = first;
+    this.second = second;
+    this.third = third;
+  }
+
+  getWinningLine() {
+    return [this.first, this.second, this.third];
+  }
+}
 
 export class WinningLines {
-  getAllWinningLines(): Square[][] {
+  getAllWinningLines(): WinningLine[] {
     return [
-      [Square.TopLeft, Square.TopMiddle, Square.TopRight],
-      [Square.CenterLeft, Square.CenterMiddle, Square.CenterRight],
-      [Square.BottomLeft, Square.BottomMiddle, Square.BottomRight],
-      [Square.TopLeft, Square.CenterLeft, Square.BottomLeft],
-      [Square.TopMiddle, Square.CenterMiddle, Square.BottomMiddle],
-      [Square.TopRight, Square.CenterRight, Square.BottomRight],
-      [Square.TopLeft, Square.CenterMiddle, Square.BottomRight],
-      [Square.TopRight, Square.CenterMiddle, Square.BottomLeft],
+      new WinningLine(Position.TopLeft, Position.TopMiddle, Position.TopRight),
+      new WinningLine(
+        Position.CenterLeft,
+        Position.CenterMiddle,
+        Position.CenterRight,
+      ),
+      new WinningLine(
+        Position.BottomLeft,
+        Position.BottomMiddle,
+        Position.BottomRight,
+      ),
+      new WinningLine(
+        Position.TopLeft,
+        Position.CenterLeft,
+        Position.BottomLeft,
+      ),
+      new WinningLine(
+        Position.TopMiddle,
+        Position.CenterMiddle,
+        Position.BottomMiddle,
+      ),
+      new WinningLine(
+        Position.TopRight,
+        Position.CenterRight,
+        Position.BottomRight,
+      ),
+      new WinningLine(
+        Position.TopLeft,
+        Position.CenterMiddle,
+        Position.BottomRight,
+      ),
+      new WinningLine(
+        Position.TopRight,
+        Position.CenterMiddle,
+        Position.BottomLeft,
+      ),
     ];
   }
 }
