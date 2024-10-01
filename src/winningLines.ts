@@ -1,17 +1,9 @@
 import { Position } from "./tictactoegame";
 
 export class WinningLine {
-  public first: Position;
-  public second: Position;
-  public third: Position;
+  public line;
   constructor(first: Position, second: Position, third: Position) {
-    this.first = first;
-    this.second = second;
-    this.third = third;
-  }
-
-  getWinningLine() {
-    return [this.first, this.second, this.third];
+    this.line = [first, second, third];
   }
 }
 

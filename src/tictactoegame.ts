@@ -2,8 +2,8 @@ import { Board } from "./board";
 import { WinningLines } from "./winningLines";
 
 export enum Player {
-  X = "X",
-  O = "O",
+  X,
+  O,
 }
 
 export enum Position {
@@ -39,9 +39,9 @@ export class TicTacToeGame {
 
   getWinner() {
     let winner = undefined;
-    for (const winningLine of this.winningLines.getAllWinningLines()) {
-      if (this.board.playerHasA(winningLine.getWinningLine())) {
-        winner = this.board.findPlayerAt(winningLine.first);
+    for (const winning of this.winningLines.getAllWinningLines()) {
+      if (this.board.playerHasA(winning.line)) {
+        winner = this.board.findPlayerAt(winning.line[0]);
       }
     }
 
