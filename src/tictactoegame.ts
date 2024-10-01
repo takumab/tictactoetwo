@@ -19,9 +19,9 @@ export enum Position {
 }
 
 export class TicTacToeGame {
-  currentPlayer: Player = Player.X;
-  board: Board;
-  winningLines: WinningLines;
+  private currentPlayer: Player = Player.X;
+  private board: Board;
+  private winningLines: WinningLines;
 
   constructor(board: Board, winningLines: WinningLines) {
     this.board = board;
@@ -55,8 +55,8 @@ export class TicTacToeGame {
   private switchPlayer() {
     if (this.currentPlayer === Player.X) {
       this.currentPlayer = Player.O;
-    } else {
-      this.currentPlayer = Player.X;
+      return;
     }
+    this.currentPlayer = Player.X;
   }
 }
