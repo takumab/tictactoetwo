@@ -33,6 +33,10 @@ export class TicTacToeGame {
   }
 
   play(position: Position) {
+    if (this.board.isNotEmpty(position)) {
+      throw new Error("Position already played");
+    }
+
     this.board.add(this.getCurrentPlayer(), position);
     this.switchPlayer();
   }

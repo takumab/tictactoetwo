@@ -13,10 +13,14 @@ export class Board {
 
   playerHasA(winningLine: Position[]) {
     return (
-      this.squares.get(winningLine[0]) !== undefined &&
-      this.squares.get(winningLine[0]) === this.findPlayerAt(winningLine[1]) &&
-      this.squares.get(winningLine[1]) === this.findPlayerAt(winningLine[2])
+      this.findPlayerAt(winningLine[0]) !== undefined &&
+      this.findPlayerAt(winningLine[0]) === this.findPlayerAt(winningLine[1]) &&
+      this.findPlayerAt(winningLine[1]) === this.findPlayerAt(winningLine[2])
     );
+  }
+
+  isNotEmpty(position: Position): boolean {
+    return this.squares.has(position);
   }
 
   isBoardFull() {

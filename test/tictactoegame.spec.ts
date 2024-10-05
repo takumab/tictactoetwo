@@ -265,4 +265,10 @@ describe("Tic Tac Toe Should", () => {
 
     expect(winner).toBe("Tie game!");
   });
+  test("not allow players to play on position already played", () => {
+    game.play(Position.TopLeft);
+    expect(() => {
+      game.play(Position.TopLeft);
+    }).toThrow(new Error("Position already played"));
+  });
 });
